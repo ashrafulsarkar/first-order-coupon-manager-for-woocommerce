@@ -4,8 +4,8 @@ on:
     branches:
     - main
 jobs:
-  stable:
-    name: Push to stable
+  trunk:
+    name: Push to trunk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
