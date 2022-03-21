@@ -2,7 +2,7 @@ name: Plugin asset/readme update
 on:
   push:
     branches:
-    - assets
+    - main
 jobs:
   stable:
     name: Push to stable
