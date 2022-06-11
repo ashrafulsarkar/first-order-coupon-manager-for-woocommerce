@@ -3,7 +3,7 @@ Contributors: ashrafulsarkar
 Tags: discount, first order discount, first order coupon, woocommerce discount, woocommerce coupon, first order coupon, order discount, first order, order amount, product category discount
 Donate link: https://www.buymeacoffee.com/ashrafulsarkar
 Requires at least: 4.6
-Tested up to: 5.9
+Tested up to: 6.0
 Requires PHP: 7.0
 Stable tag: 1.0.0
 License: GPLv2 or later
