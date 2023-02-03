@@ -5,7 +5,7 @@ Donate link: https://www.buymeacoffee.com/ashrafulsarkar
 Requires at least: 4.6
 Tested up to: 5.9
 Requires PHP: 7.0
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,5 +35,8 @@ Support me on Buy me coffee a small contribution: [BUY ME A COFFEE!](https://www
 2. Check in this box and work this plugin.
 
 == Changelog ==
+= 1.1.0 - 2023-02-03 =
+* Cancelled, Failed & Refunded order Coupon issue fixed. 
+
 = 1.0.0 - 2022-01-27 =
 * Initial Release
