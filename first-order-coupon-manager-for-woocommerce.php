@@ -3,7 +3,7 @@
  * Plugin Name: First Order Coupon Manager for WooCommerce
  * Plugin URI: https://github.com/ashrafulsarkar/first-order-coupon-manager-woocommerce
  * Description: Maintain the first-order discount using this plugin.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Ashraful Sarkar
  * Author URI: https://ashrafulsarkar.com
  * Text Domain: wfocd
@@ -110,7 +110,7 @@ class FirstOrderCouponManager
                 if (count($customer_orders) > 0) {
                     $has_ordered = false;
 
-                    $statuses = array('wc-failed', 'wc-cancelled', 'wc-refunded');
+                    $statuses = array('failed', 'cancelled', 'refunded');
 
                     // loop thru orders, if the order is not falled into failed, cancelled or refund then it consider valid
                     foreach ($customer_orders as $tmp_order) {
