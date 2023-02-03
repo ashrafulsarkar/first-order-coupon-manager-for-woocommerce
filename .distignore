@@ -1,3 +1,6 @@
 README.md
 .distignore
 .gitignore
+.wordpress-org
+.github
+.git
