@@ -5,7 +5,7 @@
  * Description: Maintain the first-order discount using this plugin.
  * Version: 1.1.0
  * Author: Ashraful Sarkar
- * Author URI: https://ashrafulsarkar.com
+ * Author URI: https://github.com/ashrafulsarkar
  * Text Domain: wfocd
  * Domain Path: /languages/
  * Requires at least: 4.6
