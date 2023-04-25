@@ -147,15 +147,17 @@ class FirstOrderCouponManager
                 }
                 
                 // retrieve all orders by email
-                $customer_orders = wc_get_orders([
+                $customer_orders_email = wc_get_orders([
                     'customer' => $email
                 ]);
-                
+
                 // retrieve all orders by first & last name
-                $customer_orders2 = wc_get_orders([
+                $customer_orders_name = wc_get_orders([
                     'billing_first_name' => $first_name,
                     'billing_last_name' => $last_name
                 ]);
+				
+				$customer_orders = array_merge($customer_orders_email, $customer_orders_name);
             }
 
             if (count($customer_orders) > 0) {
