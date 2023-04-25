@@ -3,7 +3,7 @@
  * Plugin Name: First Order Coupon Manager for WooCommerce
  * Plugin URI: https://github.com/ashrafulsarkar/first-order-coupon-manager-woocommerce
  * Description: Maintain the first-order discount using this plugin.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Ashraful Sarkar
  * Author URI: https://github.com/ashrafulsarkar
  * Text Domain: wfocd
@@ -32,6 +32,7 @@ class FirstOrderCouponManager
             add_action('woocommerce_coupon_options_usage_restriction', array($this, 'wfocd_action_woocommerce_coupon_options_usage_restriction'), 10, 2);
             add_action('woocommerce_coupon_options_save', array($this, 'wfocd_action_woocommerce_coupon_options_save'), 10, 2);
             add_filter('woocommerce_coupon_is_valid', array($this, 'wfocd_filter_woocommerce_coupon_is_valid'), 10, 3);
+            add_action('woocommerce_checkout_update_order_review', array($this, 'wfocd_woocommerce_checkout_update_order_review'));
         } else {
             add_action('admin_notices', array($this, 'admin_notices'));
         }
@@ -89,6 +90,33 @@ class FirstOrderCouponManager
         $coupon->update_meta_data('wfocd_first_order', isset($_POST['wfocd_first_order']) ? 'yes' : 'no');
         $coupon->save();
     }
+    
+    public function wfocd_woocommerce_checkout_update_order_review($posted_data) {
+        global $woocommerce;
+        
+        $post = [];
+        $vars = explode('&', $posted_data);
+        foreach ($vars as $k => $value){
+            $v = explode('=', urldecode($value));
+            $post[$v[0]] = $v[1];
+        }
+        
+        $update = [];
+        if( isset($post['billing_first_name']) && !empty($post['billing_first_name']) ){
+            $update['billing_first_name'] = wc_clean( wp_unslash($post['billing_first_name']) );
+        }
+        if( isset($post['billing_last_name']) && !empty($post['billing_last_name']) ){
+            $update['billing_last_name'] = wc_clean( wp_unslash($post['billing_last_name']) );
+        }
+        if( isset($post['billing_email']) && !empty($post['billing_email']) ){
+            $update['billing_email'] = wc_clean( wp_unslash($post['billing_email']) );
+        }
+
+        if( !empty($update) ){
+            WC()->customer->set_props($update);
+            WC()->customer->save();
+        }
+    }
 
     // Valid
     public function wfocd_filter_woocommerce_coupon_is_valid($is_valid, $coupon, $discount)
@@ -99,41 +127,53 @@ class FirstOrderCouponManager
         // NOT empty
         if ($wfocd_first_order == 'yes') {
             global $woocommerce;
-
+            
             if (is_user_logged_in()) {
                 $user_id = get_current_user_id();
 
-                // retrieve all orders
-                $customer_orders = wc_get_orders(array(
-                    'customer_id'  => $user_id,
-                ));
-                if (count($customer_orders) > 0) {
-                    $has_ordered = false;
-
-                    $statuses = array('failed', 'cancelled', 'refunded');
-
-                    // loop thru orders, if the order is not falled into failed, cancelled or refund then it consider valid
-                    foreach ($customer_orders as $tmp_order) {
-                        $order = wc_get_order($tmp_order->get_id());
-                        if (!in_array($order->get_status(), $statuses)) {
-                            $has_ordered = true;
-                        }
-                    }
-                    // if this customer already ordered, we remove the coupon
-                    if ($has_ordered == true) {
-                        wc_add_notice(__("This Coupon is only applicable for first order.", 'wfocd'), 'error');
-                        $is_valid = false;
-                    }
-                } else {
-                    // customer has no order, so valid to use this coupon
-                    $is_valid = true;
-                }
+                // retrieve all orders by user id
+                $customer_orders = wc_get_orders([
+                    'customer_id'  => $user_id
+                ]);
             } else {
-                // new user is valid
-                $is_valid = true;
+                $customer = WC()->cart->get_customer();
+                $email = $customer->get_billing_email();
+                $first_name = $customer->get_billing_first_name();
+                $last_name = $customer->get_billing_last_name();
+                
+                if( empty($email) || empty($first_name) || empty($last_name) ) {
+                    wc_add_notice(__('Please login or add this coupon code once checkout form has been filled', 'wfocd'), 'error');
+                    return false;
+                }
+                
+                // retrieve all orders by email
+                $customer_orders = wc_get_orders([
+                    'customer' => $email
+                ]);
+                
+                // retrieve all orders by first & last name
+                $customer_orders2 = wc_get_orders([
+                    'billing_first_name' => $first_name,
+                    'billing_last_name' => $last_name
+                ]);
+            }
+
+            if (count($customer_orders) > 0) {
+                $statuses = ['failed', 'cancelled', 'refunded'];
+
+                // loop thru orders, if the order is not falled into failed, cancelled or refund then it consider valid
+                foreach ($customer_orders as $tmp_order) {
+                    $order = wc_get_order($tmp_order->get_id());
+                    if (!in_array($order->get_status(), $statuses)) {
+                        // if this customer already ordered, we remove the coupon
+                        wc_add_notice(__('This Coupon is only applicable for first order.', 'wfocd'), 'error');
+                        return false;
+                    }
+                }
             }
         }
-        return $is_valid;
+        // customer has no order, so valid to use this coupon
+        return true;
     }
 }
 
