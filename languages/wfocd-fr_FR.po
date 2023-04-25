@@ -57,7 +57,7 @@ msgstr ""
 #: first-order-coupon-manager-for-woocommerce.php:145
 msgid "Please login or add this coupon code once checkout form has been filled"
 msgstr ""
-"Veuillez vous connecter ou ajouter ce code promo une fois le formulaire de "
+"Veuillez vous connecter ou ajoutez ce code promo une fois le formulaire de "
 "facturation remplis"
 
 #: first-order-coupon-manager-for-woocommerce.php:171
