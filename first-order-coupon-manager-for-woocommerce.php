@@ -7,7 +7,7 @@
  * Author: Ashraful Sarkar
  * Author URI: https://github.com/ashrafulsarkar
  * Text Domain: wfocd
- * Domain Path: /languages/
+ * Domain Path: /languages
  * Requires at least: 4.6
  * Requires PHP: 7.0
  * License:      GNU General Public License v2 or later
@@ -19,7 +19,6 @@ if (!defined('ABSPATH')) {
 
 class FirstOrderCouponManager
 {
-
     public function __construct(){}
 
     /**
@@ -27,14 +26,14 @@ class FirstOrderCouponManager
      */
     public function init()
     {
-        add_action('plugin_loaded', array($this, 'wfocd_textdomain_load'));
+		$this->wfocd_textdomain_load();
         if (class_exists('WooCommerce')) {
-            add_action('woocommerce_coupon_options_usage_restriction', array($this, 'wfocd_action_woocommerce_coupon_options_usage_restriction'), 10, 2);
-            add_action('woocommerce_coupon_options_save', array($this, 'wfocd_action_woocommerce_coupon_options_save'), 10, 2);
-            add_filter('woocommerce_coupon_is_valid', array($this, 'wfocd_filter_woocommerce_coupon_is_valid'), 10, 3);
-            add_action('woocommerce_checkout_update_order_review', array($this, 'wfocd_woocommerce_checkout_update_order_review'));
+            add_action('woocommerce_coupon_options_usage_restriction', [$this, 'wfocd_action_woocommerce_coupon_options_usage_restriction'], 10, 2);
+            add_action('woocommerce_coupon_options_save', [$this, 'wfocd_action_woocommerce_coupon_options_save'], 10, 2);
+            add_filter('woocommerce_coupon_is_valid', [$this, 'wfocd_filter_woocommerce_coupon_is_valid'], 10, 3);
+            add_action('woocommerce_checkout_update_order_review', [$this, 'wfocd_woocommerce_checkout_update_order_review']);
         } else {
-            add_action('admin_notices', array($this, 'admin_notices'));
+            add_action('admin_notices', [$this, 'admin_notices']);
         }
     }
 
@@ -43,7 +42,7 @@ class FirstOrderCouponManager
      */
     public function wfocd_textdomain_load()
     {
-        load_plugin_textdomain('wfocd', false, plugin_dir_path(__FILE__) . '/languages');
+        load_plugin_textdomain('wfocd', false, dirname(plugin_basename(__FILE__)).'/languages');
     }
 
     /**
@@ -59,13 +58,13 @@ class FirstOrderCouponManager
                         __('First Order Coupon Manager for WooCommerce', 'wfocd'),
                         sprintf('<a href="%s" target="_blank"><strong>%s</strong></a>', esc_attr('https://wordpress.org/plugins/woocommerce'), __('WooCommerce', 'wfocd')),
                     ),
-                    array(
-                        'a'      => array(
-                            'href'  => array(),
-                            'target' => array('_blank')
-                        ),
-                        'strong' => array()
-                    )
+                    [
+                        'a' => [
+                            'href' => [],
+                            'target' => ['_blank']
+                        ],
+                        'strong' => []
+                    ]
                 ); ?>
             </p>
         </div>
@@ -75,18 +74,17 @@ class FirstOrderCouponManager
     // Add new field - usage restriction tab
     public function wfocd_action_woocommerce_coupon_options_usage_restriction($coupon_get_id, $coupon)
     {
-        woocommerce_wp_checkbox(array(
+        woocommerce_wp_checkbox([
             'id' => 'wfocd_first_order',
             'label' => __('First order only', 'wfocd'),
             'description' => __('Check this box if the coupon cannot be used after first order.', 'wfocd'),
-        ));
+        ]);
     }
 
 
     // Save data
     public function wfocd_action_woocommerce_coupon_options_save($post_id, $coupon)
     {
-
         $coupon->update_meta_data('wfocd_first_order', isset($_POST['wfocd_first_order']) ? 'yes' : 'no');
         $coupon->save();
     }
