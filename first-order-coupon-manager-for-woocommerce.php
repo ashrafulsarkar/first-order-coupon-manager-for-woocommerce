@@ -106,6 +106,7 @@ class FirstOrderCouponManager
                 // retrieve all orders
                 $customer_orders = wc_get_orders(array(
                     'customer_id'  => $user_id,
+                    'limit'      => -1
                 ));
                 if (count($customer_orders) > 0) {
                     $has_ordered = false;
