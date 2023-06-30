@@ -35,6 +35,9 @@ Support me on Buy me coffee a small contribution: [BUY ME A COFFEE!](https://www
 2. Check in this box and work this plugin.
 
 == Changelog ==
+= 1.1.1 - 2023-06-30 =
+* Retrieve all orders issue fixed. 
+
 = 1.1.0 - 2023-02-03 =
 * Cancelled, Failed & Refunded order Coupon issue fixed. 
 
