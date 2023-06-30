@@ -6,7 +6,7 @@
  * Version: 1.1.1
  * Author: Ashraful Sarkar
  * Author URI: https://github.com/ashrafulsarkar
- * Text Domain: wfocd
+ * Text Domain: first-order-coupon-manager-for-woocommerce
  * Domain Path: /languages/
  * Requires at least: 4.6
  * Requires PHP: 7.0
@@ -42,7 +42,7 @@ class FirstOrderCouponManager
      */
     public function wfocd_textdomain_load()
     {
-        load_plugin_textdomain('wfocd', false, plugin_dir_path(__FILE__) . '/languages');
+        load_plugin_textdomain('first-order-coupon-manager-for-woocommerce', false, plugin_dir_path(__FILE__) . '/languages');
     }
 
     /**
@@ -54,9 +54,9 @@ class FirstOrderCouponManager
         <div class="error">
             <p><?php echo wp_kses(
                     sprintf(
-                        __('<strong>%s</strong> addon requires %s to be <strong>installed</strong> and <strong>activated</strong>.', 'wfocd'),
-                        __('First Order Coupon Manager for WooCommerce', 'wfocd'),
-                        sprintf('<a href="%s" target="_blank"><strong>%s</strong></a>', esc_attr('https://wordpress.org/plugins/woocommerce'), __('WooCommerce', 'wfocd')),
+                        __('<strong>%s</strong> addon requires %s to be <strong>installed</strong> and <strong>activated</strong>.', 'first-order-coupon-manager-for-woocommerce'),
+                        __('First Order Coupon Manager for WooCommerce', 'first-order-coupon-manager-for-woocommerce'),
+                        sprintf('<a href="%s" target="_blank"><strong>%s</strong></a>', esc_attr('https://wordpress.org/plugins/woocommerce'), __('WooCommerce', 'first-order-coupon-manager-for-woocommerce')),
                     ),
                     array(
                         'a'      => array(
@@ -76,8 +76,8 @@ class FirstOrderCouponManager
     {
         woocommerce_wp_checkbox(array(
             'id' => 'wfocd_first_order',
-            'label' => __('First order only', 'wfocd'),
-            'description' => __('Check this box if the coupon cannot be used after first order.', 'wfocd'),
+            'label' => __('First order only', 'first-order-coupon-manager-for-woocommerce'),
+            'description' => __('Check this box if the coupon cannot be used after first order.', 'first-order-coupon-manager-for-woocommerce'),
         ));
     }
 
@@ -122,7 +122,7 @@ class FirstOrderCouponManager
                     }
                     // if this customer already ordered, we remove the coupon
                     if ($has_ordered == true) {
-                        wc_add_notice(__("This Coupon is only applicable for first order.", 'wfocd'), 'error');
+                        wc_add_notice(__("This Coupon is only applicable for first order.", 'first-order-coupon-manager-for-woocommerce'), 'error');
                         $is_valid = false;
                     }
                 } else {

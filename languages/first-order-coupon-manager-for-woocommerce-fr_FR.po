@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: First Order Coupon Manager for WooCommerce\n"
+"POT-Creation-Date: 2022-01-26 03:57+0600\n"
+"PO-Revision-Date: 2023-04-27 08:46+0000\n"
+"Last-Translator: \n"
+"Language-Team: Français\n"
+"Language: fr-FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: first-order-coupon-manager-wooCommerce.php\n"
+"Report-Msgid-Bugs-To: \n"
+"X-Loco-Version: 2.6.4; wp-6.2"
+
+#: first-order-coupon-manager-for-woocommerce.php:58
+#, php-format
+msgid ""
+"<strong>%s</strong> addon requires %s to be <strong>installed</strong> and "
+"<strong>activated</strong>."
+msgstr ""
+
+#. Author of the plugin
+msgid "Ashraful Sarkar"
+msgstr ""
+
+#: first-order-coupon-manager-for-woocommerce.php:81
+msgid "Check this box if the coupon cannot be used after first order."
+msgstr ""
+"Cochez cette case si le coupon ne peut plus être utilisé après la première "
+"commande."
+
+#. Name of the plugin
+#: first-order-coupon-manager-for-woocommerce.php:59
+msgid "First Order Coupon Manager for WooCommerce"
+msgstr ""
+
+#: first-order-coupon-manager-for-woocommerce.php:80
+msgid "First order only"
+msgstr "Première commande uniquement"
+
+#. Author URI of the plugin
+msgid "https://github.com/ashrafulsarkar"
+msgstr ""
+
+#. URI of the plugin
+msgid ""
+"https://github.com/ashrafulsarkar/first-order-coupon-manager-woocommerce"
+msgstr ""
+
+#. Description of the plugin
+msgid "Maintain the first-order discount using this plugin."
+msgstr ""
+"Ajoute la possibilité de configurer un coupon promo pour la première "
+"commande uniquement"
+
+#: first-order-coupon-manager-for-woocommerce.php:145
+msgid "Please login or add this coupon code once checkout form has been filled"
+msgstr ""
+"Veuillez vous connecter ou ajoutez ce code promo une fois le formulaire de "
+"facturation remplis"
+
+#: first-order-coupon-manager-for-woocommerce.php:171
+msgid "This Coupon is only applicable for first order."
+msgstr "Ce code promo n'est valide que sur la première commande."
+
+#: first-order-coupon-manager-for-woocommerce.php:60
+msgid "WooCommerce"
+msgstr ""
