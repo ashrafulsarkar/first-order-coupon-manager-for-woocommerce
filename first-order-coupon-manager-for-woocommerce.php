@@ -3,7 +3,7 @@
  * Plugin Name: First Order Coupon Manager for WooCommerce
  * Plugin URI: https://github.com/ashrafulsarkar/first-order-coupon-manager-woocommerce
  * Description: Maintain the first-order discount using this plugin.
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: Ashraful Sarkar
  * Author URI: https://github.com/ashrafulsarkar
  * Text Domain: wfocd
