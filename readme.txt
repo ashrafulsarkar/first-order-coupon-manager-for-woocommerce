@@ -35,7 +35,7 @@ Support me on Buy me coffee a small contribution: [BUY ME A COFFEE!](https://www
 2. Check in this box and work this plugin.
 
 == Changelog ==
-= 1.2.1 - 2024-03-26 =
+= 1.2.2 - 2024-03-26 =
 * Version Update and Plugin dependency added.
 
 = 1.2.1 - 2023-07-26 =
